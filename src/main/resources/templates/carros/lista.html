@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Carros - TiendaCarros</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<main class="main-content">
+    <div class="page-header">
+        <div class="page-title">
+            <h1>&#x1F697; Carros</h1>
+            <p>Listado completo del inventario de carros</p>
+        </div>
+        <a th:href="@{/carros/nuevo}" class="btn btn-primary">&#x2795; Nuevo Carro</a>
+    </div>
+
+    <div th:if="${mensaje}" th:classappend="${tipo == 'success' ? 'alert-success' : 'alert-danger'}" class="alert">
+        <span th:text="${mensaje}"></span>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Inventario de Carros</h3>
+            <span class="badge badge-blue" th:text="${#lists.size(carros)} + ' registros'"></span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Placa</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(carros)}">
+                        <td colspan="4">
+                            <div class="empty-state">
+                                <div class="empty-icon">&#x1F697;</div>
+                                <p>No hay carros registrados aun</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr th:each="carro : ${carros}">
+                        <td th:text="${carro.placa_carro}"></td>
+                        <td th:text="${carro.marca_carro}"></td>
+                        <td th:text="${carro.modelo_carro}"></td>
+                        <td>
+                            <a th:href="@{/carros/editar/{p}(p=${carro.placa_carro})}" class="btn-edit-sm">&#x270F; Editar</a>
+                            &nbsp;
+                            <a th:href="@{/carros/eliminar/{p}(p=${carro.placa_carro})}" class="btn-danger-sm"
+                               onclick="return confirm('Eliminar este carro?')">&#x1F5D1; Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

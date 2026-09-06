@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${titulo} + ' - TiendaCarros'">Motor</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<main class="main-content">
+    <div class="page-header">
+        <div class="page-title">
+            <h1 th:text="'&#x2699;&#xFE0F; ' + ${titulo}">Motor</h1>
+            <p>Completa los campos del formulario</p>
+        </div>
+        <a th:href="@{/motores}" class="btn btn-outline">&#x2190; Volver</a>
+    </div>
+
+    <div class="card form-card">
+        <div class="card-body">
+            <form th:action="@{/motores/guardar}" th:object="${motor}" method="post">
+                <div class="form-group">
+                    <label>Numero de Serie</label>
+                    <input type="text" th:field="*{numero_serie_motor}" class="form-control" placeholder="Ej: MOT-0012" required/>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Motor</label>
+                    <input type="text" th:field="*{tipo_motor}" class="form-control" placeholder="Ej: Gasolina, Diesel, Electrico" required/>
+                </div>
+                <div class="form-group">
+                    <label>Cilindraje</label>
+                    <input type="text" th:field="*{cilindraje_motor}" class="form-control" placeholder="Ej: 1600cc" required/>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" th:text="'&#x2713; ' + ${accion}">Guardar</button>
+                    <a th:href="@{/motores}" class="btn btn-outline">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

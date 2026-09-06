@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Motores - TiendaCarros</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<main class="main-content">
+    <div class="page-header">
+        <div class="page-title">
+            <h1>&#x2699;&#xFE0F; Motores</h1>
+            <p>Catalogo de motores registrados</p>
+        </div>
+        <a th:href="@{/motores/nuevo}" class="btn btn-primary">&#x2795; Nuevo Motor</a>
+    </div>
+
+    <div th:if="${mensaje}" th:classappend="${tipo == 'success' ? 'alert-success' : 'alert-danger'}" class="alert">
+        <span th:text="${mensaje}"></span>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Catalogo de Motores</h3>
+            <span class="badge badge-blue" th:text="${#lists.size(motores)} + ' registros'"></span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No. Serie</th>
+                        <th>Tipo</th>
+                        <th>Cilindraje</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(motores)}">
+                        <td colspan="4">
+                            <div class="empty-state">
+                                <div class="empty-icon">&#x2699;&#xFE0F;</div>
+                                <p>No hay motores registrados aun</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr th:each="motor : ${motores}">
+                        <td th:text="${motor.numero_serie_motor}"></td>
+                        <td th:text="${motor.tipo_motor}"></td>
+                        <td th:text="${motor.cilindraje_motor}"></td>
+                        <td>
+                            <a th:href="@{/motores/editar/{id}(id=${motor.numero_serie_motor})}" class="btn-edit-sm">&#x270F; Editar</a>
+                            &nbsp;
+                            <a th:href="@{/motores/eliminar/{id}(id=${motor.numero_serie_motor})}" class="btn-danger-sm"
+                               onclick="return confirm('Eliminar este motor?')">&#x1F5D1; Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pasajeros - TiendaCarros</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<main class="main-content">
+    <div class="page-header">
+        <div class="page-title">
+            <h1>&#x1F465; Pasajeros</h1>
+            <p>Listado de pasajeros registrados</p>
+        </div>
+        <a th:href="@{/pasajeros/nuevo}" class="btn btn-primary">&#x2795; Nuevo Pasajero</a>
+    </div>
+
+    <div th:if="${mensaje}" th:classappend="${tipo == 'success' ? 'alert-success' : 'alert-danger'}" class="alert">
+        <span th:text="${mensaje}"></span>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Pasajeros Registrados</h3>
+            <span class="badge badge-blue" th:text="${#lists.size(pasajeros)} + ' registros'"></span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Nombre Completo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(pasajeros)}">
+                        <td colspan="3">
+                            <div class="empty-state">
+                                <div class="empty-icon">&#x1F465;</div>
+                                <p>No hay pasajeros registrados aun</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr th:each="pasajero : ${pasajeros}">
+                        <td th:text="${pasajero.cedula_pasajero}"></td>
+                        <td th:text="${pasajero.nombre_completo_pasajero}"></td>
+                        <td>
+                            <a th:href="@{/pasajeros/editar/{c}(c=${pasajero.cedula_pasajero})}" class="btn-edit-sm">&#x270F; Editar</a>
+                            &nbsp;
+                            <a th:href="@{/pasajeros/eliminar/{c}(c=${pasajero.cedula_pasajero})}" class="btn-danger-sm"
+                               onclick="return confirm('Eliminar este pasajero?')">&#x1F5D1; Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

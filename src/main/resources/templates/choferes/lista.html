@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Choferes - TiendaCarros</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<main class="main-content">
+    <div class="page-header">
+        <div class="page-title">
+            <h1>&#x1F464; Choferes</h1>
+            <p>Listado de choferes registrados</p>
+        </div>
+        <a th:href="@{/choferes/nuevo}" class="btn btn-primary">&#x2795; Nuevo Chofer</a>
+    </div>
+
+    <div th:if="${mensaje}" th:classappend="${tipo == 'success' ? 'alert-success' : 'alert-danger'}" class="alert">
+        <span th:text="${mensaje}"></span>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Choferes Registrados</h3>
+            <span class="badge badge-blue" th:text="${#lists.size(choferes)} + ' registros'"></span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Nombre Completo</th>
+                        <th>Licencia</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(choferes)}">
+                        <td colspan="4">
+                            <div class="empty-state">
+                                <div class="empty-icon">&#x1F464;</div>
+                                <p>No hay choferes registrados aun</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr th:each="chofer : ${choferes}">
+                        <td th:text="${chofer.cedula_chofer}"></td>
+                        <td th:text="${chofer.nombre_completo_chofer}"></td>
+                        <td th:text="${chofer.licencia_chofer}"></td>
+                        <td>
+                            <a th:href="@{/choferes/editar/{c}(c=${chofer.cedula_chofer})}" class="btn-edit-sm">&#x270F; Editar</a>
+                            &nbsp;
+                            <a th:href="@{/choferes/eliminar/{c}(c=${chofer.cedula_chofer})}" class="btn-danger-sm"
+                               onclick="return confirm('Eliminar este chofer?')">&#x1F5D1; Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

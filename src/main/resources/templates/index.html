@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>TiendaCarros - Inicio</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="~{sidebar :: sidebar}"></div>
+<main class="main-content">
+    <div class="hero">
+        <h1>&#x1F697; TiendaCarros</h1>
+        <p>Sistema de gestion con Spring Boot y Thymeleaf</p>
+    </div>
+
+    <div class="modules-grid">
+        <a th:href="@{/carros}" class="module-card">
+            <div class="mod-icon">&#x1F697;</div>
+            <h3>Carros</h3>
+            <p>Registrar, editar y eliminar carros del inventario</p>
+        </a>
+        <a th:href="@{/motores}" class="module-card">
+            <div class="mod-icon">&#x2699;&#xFE0F;</div>
+            <h3>Motores</h3>
+            <p>Gestion del catalogo de motores disponibles</p>
+        </a>
+        <a th:href="@{/choferes}" class="module-card">
+            <div class="mod-icon">&#x1F464;</div>
+            <h3>Choferes</h3>
+            <p>Administrar choferes y sus licencias</p>
+        </a>
+        <a th:href="@{/pasajeros}" class="module-card">
+            <div class="mod-icon">&#x1F465;</div>
+            <h3>Pasajeros</h3>
+            <p>Registro de pasajeros del sistema</p>
+        </a>
+    </div>
+</main>
+</body>
+</html>

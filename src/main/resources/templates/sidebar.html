@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<aside th:fragment="sidebar" class="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">&#x1F697;</div>
+        <h2>TiendaCarros</h2>
+        <p>Sistema de Gestion</p>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-label">Menu Principal</div>
+        <a th:href="@{/}" class="nav-link">
+            <span class="icon">&#x1F3E0;</span> Inicio
+        </a>
+        <div class="nav-label">Modulos</div>
+        <a th:href="@{/carros}" class="nav-link">
+            <span class="icon">&#x1F697;</span> Carros
+        </a>
+        <a th:href="@{/motores}" class="nav-link">
+            <span class="icon">&#x2699;&#xFE0F;</span> Motores
+        </a>
+        <a th:href="@{/choferes}" class="nav-link">
+            <span class="icon">&#x1F464;</span> Choferes
+        </a>
+        <a th:href="@{/pasajeros}" class="nav-link">
+            <span class="icon">&#x1F465;</span> Pasajeros
+        </a>
+    </nav>
+    <div class="sidebar-footer">Spring Boot + Thymeleaf</div>
+</aside>
+</body>
+</html>

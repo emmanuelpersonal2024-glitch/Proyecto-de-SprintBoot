@@ -34,3 +34,7 @@ build/
 ### OS Files ###
 .DS_Store
 Thumbs.db
+
+# Documentación local
+DOCUMENTACION_PROYECTO.md
+DOCUMENTACION_PROYECTO.docx
